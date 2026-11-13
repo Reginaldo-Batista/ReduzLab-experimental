@@ -41,7 +41,7 @@
         </nav>
     </header>
 
-    <main class="container my-4 flex-grow-1">
+    <main class="{% block main_width_class %}container{% endblock %} my-4 flex-grow-1">
         {% block content %}{% endblock %}
     </main>
 

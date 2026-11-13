@@ -89,32 +89,18 @@ def history_page_delete():
     """
     Deletes all files from the uploads and results directories.
     """
-    uploads_dir = current_app.config['UPLOAD_FOLDER']
-    results_dir = current_app.config['RESULTS_FOLDER']
-    deleted_count = 0
-    error_count = 0
-    # Auxiliary function to delete files in a folder
-    def clear_directory(directory_path):
-        nonlocal deleted_count, error_count
-        for filename in os.listdir(directory_path):
-            # Don't delete .gitkeep
-            if filename == '.gitkeep':
-                continue
-            file_path = os.path.join(directory_path, filename)
-            try:
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
-                    deleted_count += 1
-            except Exception as e:
-                print(f"Error deleting file {file_path}: {e}")
-                error_count += 1
-    # Clean the two folders
-    clear_directory(uploads_dir)
-    clear_directory(results_dir)
-    if error_count > 0:
-        flash(_('Could not delete all files. %(deleted)s files deleted, %(failed)s failed.', deleted=deleted_count, failed=error_count), 'danger')
+    from app.comparison import store
+    outcome = store.clear_history(store.database_path(current_app), [
+        current_app.config['UPLOAD_FOLDER'], current_app.config['RESULTS_FOLDER']
+    ])
+    if outcome is None:
+        flash(_('Cannot delete files while a comparison is running or queued.'), 'warning')
     else:
-        flash(_('Successfully deleted %(count)s files from memory.', count=deleted_count), 'success')
+        deleted_count, error_count = outcome
+        if error_count:
+            flash(_('Could not delete all files. %(deleted)s files deleted, %(failed)s failed.', deleted=deleted_count, failed=error_count), 'danger')
+        else:
+            flash(_('Successfully deleted %(count)s files from memory.', count=deleted_count), 'success')
     return redirect(url_for('main.history_page'))
 
 

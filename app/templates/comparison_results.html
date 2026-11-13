@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block main_width_class %}container-fluid comparison-page{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comparison.css') }}">
+<h1>{{ _('Algorithm comparison') }}</h1>
+<p id="comparison-progress" class="text-muted" role="status" aria-live="polite">{{ _('Waiting for results...') }}</p>
+<div id="comparison-connection-error" class="alert alert-warning d-none" role="alert">{{ _('Could not update progress. Retrying...') }}</div>
+<fieldset class="comparison-layout mb-3">
+    <legend>{{ _('Graphs per row') }}</legend>
+    <label><input type="radio" name="comparison-columns" value="1"> {{ _('1 per row') }}</label>
+    <label><input type="radio" name="comparison-columns" value="2" checked> {{ _('2 per row') }}</label>
+    <label><input type="radio" name="comparison-columns" value="3"> {{ _('3 per row') }}</label>
+    <p class="comparison-layout-note">{{ _('The number of columns adapts to smaller screens.') }}</p>
+</fieldset>
+<div class="comparison-grid" data-columns="2">
+    {% for name in algorithms %}
+    <div>
+        <section class="card h-100" data-algorithm="{{ name }}">
+            <div class="card-header"><h2 class="h4 mb-0">{{ name }}</h2></div>
+            <div class="card-body">
+                <p class="algorithm-status" role="status">{{ _('Waiting') }}</p>
+                <div class="algorithm-error alert alert-danger d-none" role="alert"></div>
+                <div class="algorithm-output"></div>
+            </div>
+        </section>
+    </div>
+    {% endfor %}
+</div>
+<a class="btn btn-outline-primary mt-4" href="{{ url_for('main.comparison_form') }}">{{ _('New comparison') }}</a>
+<script id="comparison-config" type="application/json">{{ {
+    'statusUrl': url_for('main.comparison_status', job_id=job_id),
+    'labels': {
+        'queued': _('Waiting'), 'running': _('Running'), 'completed': _('Completed'),
+        'failed': _('Failed'), 'interrupted': _('Interrupted'),
+        'progress': _('%(done)s of %(total)s algorithms finished', done='{done}', total='{total}'),
+        'downloadPlot': _('Download Plot'), 'downloadCsv': _('Download Reduced Data (CSV)'),
+        'metrics': _('Metrics'), 'plot': _('%(name)s Plot', name=''),
+        'execution_time': _('Execution Time (s)'), 'explained_variance': _('Explained Variance (%%)'),
+        'silhouette_score': _('Silhouette Score'), 'davies_bouldin': _('Davies-Bouldin Index'),
+        'eigenvalues_sum': _('Sum of eigenvalues'), 'lda1_top': _('Top Impact on X-Axis (LDA1)'),
+        'lda2_top': _('Top Impact on Y-Axis (LDA2)')
+    }
+}|tojson }}</script>
+<script src="{{ url_for('static', filename='js/comparison.js') }}" defer></script>
+{% endblock %}

@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2025 ORGANIZATION
+# Copyright (C) 2026 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-09-22 11:47-0300\n"
+"POT-Creation-Date: 2026-11-13 13:25-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,159 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
+
+#: app/comparison/fields.py:10 app/templates/algorithms_pages/kpca_page.html:72
+#: app/templates/algorithms_pages/lle_page.html:70
+#: app/templates/algorithms_pages/nca_page.html:52
+#: app/templates/algorithms_pages/tsne_page.html:77
+msgid "Random State (optional):"
+msgstr ""
+
+#: app/comparison/fields.py:11
+#: app/templates/algorithms_pages/isomap_page.html:31
+#: app/templates/algorithms_pages/lle_page.html:31
+msgid "Number of Neighbors:"
+msgstr ""
+
+#: app/comparison/fields.py:12
+#: app/templates/algorithms_pages/isomap_page.html:45
+#: app/templates/algorithms_pages/kpca_page.html:61
+#: app/templates/algorithms_pages/lle_page.html:51
+msgid "Eigen Solver:"
+msgstr ""
+
+#: app/comparison/fields.py:13
+#: app/templates/algorithms_pages/isomap_page.html:63
+#: app/templates/algorithms_pages/lle_page.html:60
+msgid "Neighbors Algorithm:"
+msgstr ""
+
+#: app/comparison/fields.py:15 app/templates/algorithms_pages/pca_page.html:32
+msgid "Enable Whitening"
+msgstr ""
+
+#: app/comparison/fields.py:16 app/templates/algorithms_pages/pca_page.html:38
+msgid "SVD Solver:"
+msgstr ""
+
+#: app/comparison/fields.py:17 app/templates/algorithms_pages/kpca_page.html:31
+msgid "Kernel:"
+msgstr ""
+
+#: app/comparison/fields.py:18 app/templates/algorithms_pages/kpca_page.html:43
+msgid "Degree (for Poly kernel):"
+msgstr ""
+
+#: app/comparison/fields.py:19 app/templates/algorithms_pages/kpca_page.html:49
+msgid "Gamma (for RBF, Poly, Sigmoid):"
+msgstr ""
+
+#: app/comparison/fields.py:20 app/templates/algorithms_pages/kpca_page.html:55
+msgid "Coef0 (for Poly, Sigmoid):"
+msgstr ""
+
+#: app/comparison/fields.py:21 app/templates/algorithms_pages/tsne_page.html:31
+msgid "Perplexity:"
+msgstr ""
+
+#: app/comparison/fields.py:21 app/templates/algorithms_pages/tsne_page.html:36
+msgid "Learning Rate:"
+msgstr ""
+
+#: app/comparison/fields.py:22 app/comparison/fields.py:29
+#: app/templates/algorithms_pages/nca_page.html:42
+#: app/templates/algorithms_pages/tsne_page.html:41
+msgid "Max Iterations:"
+msgstr ""
+
+#: app/comparison/fields.py:23 app/templates/algorithms_pages/tsne_page.html:46
+msgid "Early Exaggeration:"
+msgstr ""
+
+#: app/comparison/fields.py:24 app/comparison/fields.py:28
+#: app/templates/algorithms_pages/nca_page.html:31
+#: app/templates/algorithms_pages/tsne_page.html:51
+msgid "Initialization Method:"
+msgstr ""
+
+#: app/comparison/fields.py:25 app/comparison/fields.py:31
+#: app/templates/algorithms_pages/lle_page.html:41
+#: app/templates/algorithms_pages/tsne_page.html:59
+msgid "Method:"
+msgstr ""
+
+#: app/comparison/fields.py:26 app/comparison/fields.py:33
+#: app/templates/algorithms_pages/isomap_page.html:36
+#: app/templates/algorithms_pages/tsne_page.html:67
+msgid "Distance Metric:"
+msgstr ""
+
+#: app/comparison/fields.py:27 app/templates/algorithms_pages/lda_page.html:31
+msgid "Solver:"
+msgstr ""
+
+#: app/comparison/fields.py:27 app/templates/algorithms_pages/lda_page.html:39
+msgid "Shrinkage:"
+msgstr ""
+
+#: app/comparison/fields.py:29 app/templates/algorithms_pages/nca_page.html:47
+msgid "Tolerance (optional):"
+msgstr ""
+
+#: app/comparison/fields.py:30
+msgid "Regularization:"
+msgstr ""
+
+#: app/comparison/fields.py:34
+#: app/templates/algorithms_pages/isomap_page.html:54
+msgid "Path Method:"
+msgstr ""
+
+#: app/main/comparison_routes.py:76
+msgid "The comparison executor is unavailable. Please try again shortly."
+msgstr ""
+
+#: app/main/comparison_routes.py:96
+msgid "The executor stopped before this algorithm finished."
+msgstr ""
+
+#: app/main/comparison_routes.py:97
+msgid ""
+"The target has more than 20 classes; select a categorical target for this"
+" supervised algorithm."
+msgstr ""
+
+#: app/main/comparison_routes.py:98
+msgid ""
+"LDA needs more target classes than output dimensions and enough numeric "
+"features."
+msgstr ""
+
+#: app/main/comparison_routes.py:99
+msgid "T-SNE perplexity must be lower than the number of samples after sampling."
+msgstr ""
+
+#: app/main/comparison_routes.py:100
+msgid ""
+"The number of neighbors must be lower than the number of samples after "
+"sampling."
+msgstr ""
+
+#: app/main/comparison_routes.py:101
+msgid ""
+"The algorithm or graph generation failed. Check the parameters and server"
+" log."
+msgstr ""
+
+#: app/main/comparison_routes.py:102
+msgid ""
+"The dataset could not be prepared. Check its values and the selected "
+"parameters."
+msgstr ""
+
+#: app/main/comparison_routes.py:103
+msgid "The algorithm exceeded the execution time limit."
+msgstr ""
 
 #: app/main/routes.py:28
 msgid "No file part in request. Please try again."
@@ -38,48 +191,93 @@ msgstr ""
 msgid "Invalid file type. Please upload a .csv or .xlsx file."
 msgstr ""
 
-#: app/main/routes.py:115
+#: app/main/routes.py:97
+msgid "Cannot delete files while a comparison is running or queued."
+msgstr ""
+
+#: app/main/routes.py:101
 #, python-format
 msgid "Could not delete all files. %(deleted)s files deleted, %(failed)s failed."
 msgstr ""
 
-#: app/main/routes.py:117
+#: app/main/routes.py:103
 #, python-format
 msgid "Successfully deleted %(count)s files from memory."
 msgstr ""
 
-#: app/main/routes.py:125
+#: app/main/routes.py:111
+msgid "Language changed successfully."
+msgstr ""
+
+#: app/main/routes.py:121
 #, python-format
 msgid "File is too large. The maximum allowed size is %(size)s MB."
 msgstr ""
 
-#: app/main/algorithm_routes/isomap_route.py:58
-#: app/main/algorithm_routes/kpca_route.py:58
-#: app/main/algorithm_routes/lda_route.py:67
-#: app/main/algorithm_routes/lle_route.py:62
-#: app/main/algorithm_routes/nca_route.py:65
-#: app/main/algorithm_routes/pca_route.py:61
-#: app/main/algorithm_routes/tsne_route.py:62
+#: app/main/algorithm_routes/isomap_route.py:65
+#: app/main/algorithm_routes/kpca_route.py:65
+#: app/main/algorithm_routes/lda_route.py:68
+#: app/main/algorithm_routes/lle_route.py:69
+#: app/main/algorithm_routes/nca_route.py:72
+#: app/main/algorithm_routes/pca_route.py:71
+#: app/main/algorithm_routes/tsne_route.py:69
+#: app/templates/comparison_results.html:38
 msgid "Execution Time (s)"
 msgstr ""
 
-#: app/main/algorithm_routes/isomap_route.py:62
-#: app/main/algorithm_routes/kpca_route.py:62
-#: app/main/algorithm_routes/lda_route.py:71
-#: app/main/algorithm_routes/lle_route.py:66
-#: app/main/algorithm_routes/nca_route.py:69
-#: app/main/algorithm_routes/pca_route.py:66
-#: app/main/algorithm_routes/tsne_route.py:66
+#: app/main/algorithm_routes/isomap_route.py:66
+#: app/main/algorithm_routes/kpca_route.py:66
+#: app/main/algorithm_routes/lda_route.py:69
+#: app/main/algorithm_routes/lle_route.py:70
+#: app/main/algorithm_routes/nca_route.py:73
+#: app/main/algorithm_routes/pca_route.py:73
+#: app/main/algorithm_routes/tsne_route.py:70
+#: app/templates/comparison_results.html:39
+msgid "Silhouette Score"
+msgstr ""
+
+#: app/main/algorithm_routes/isomap_route.py:67
+#: app/main/algorithm_routes/kpca_route.py:67
+#: app/main/algorithm_routes/lda_route.py:70
+#: app/main/algorithm_routes/lle_route.py:71
+#: app/main/algorithm_routes/nca_route.py:74
+#: app/main/algorithm_routes/pca_route.py:74
+#: app/main/algorithm_routes/tsne_route.py:71
+#: app/templates/comparison_results.html:39
+msgid "Davies-Bouldin Index"
+msgstr ""
+
+#: app/main/algorithm_routes/isomap_route.py:71
+#: app/main/algorithm_routes/kpca_route.py:71
+#: app/main/algorithm_routes/lda_route.py:84
+#: app/main/algorithm_routes/lle_route.py:75
+#: app/main/algorithm_routes/nca_route.py:78
+#: app/main/algorithm_routes/pca_route.py:78
+#: app/main/algorithm_routes/tsne_route.py:76
 #, python-format
 msgid "An error occurred during processing: %(error)s"
 msgstr ""
 
-#: app/main/algorithm_routes/lda_route.py:40
+#: app/main/algorithm_routes/lda_route.py:35
 #, python-format
 msgid ""
 "LDA is a supervised algorithm for classification. The target column "
 "'%(target_col)s' has too many unique values and seems to be continuous. "
 "Please choose a categorical target."
+msgstr ""
+
+#: app/main/algorithm_routes/lda_route.py:74
+msgid "Explained Variance (%)"
+msgstr ""
+
+#: app/main/algorithm_routes/lda_route.py:77
+#: app/templates/comparison_results.html:40
+msgid "Top Impact on X-Axis (LDA1)"
+msgstr ""
+
+#: app/main/algorithm_routes/lda_route.py:80
+#: app/templates/comparison_results.html:41
+msgid "Top Impact on Y-Axis (LDA2)"
 msgstr ""
 
 #: app/main/algorithm_routes/nca_route.py:40
@@ -90,7 +288,8 @@ msgid ""
 "Please choose a categorical target."
 msgstr ""
 
-#: app/main/algorithm_routes/pca_route.py:62
+#: app/main/algorithm_routes/pca_route.py:72
+#: app/templates/comparison_results.html:38
 #, python-format
 msgid "Explained Variance (%%)"
 msgstr ""
@@ -180,6 +379,7 @@ msgid "Results"
 msgstr ""
 
 #: app/templates/_results_section.html:9
+#: app/templates/comparison_results.html:37
 msgid "Metrics"
 msgstr ""
 
@@ -189,15 +389,18 @@ msgstr ""
 
 #: app/templates/_results_section.html:24
 #: app/templates/_results_section.html:27
+#: app/templates/comparison_results.html:37
 #, python-format
 msgid "%(name)s Plot"
 msgstr ""
 
 #: app/templates/_results_section.html:33
+#: app/templates/comparison_results.html:36
 msgid "Download Plot"
 msgstr ""
 
 #: app/templates/_results_section.html:37
+#: app/templates/comparison_results.html:36
 msgid "Download Reduced Data (CSV)"
 msgstr ""
 
@@ -214,7 +417,7 @@ msgstr ""
 msgid "%(name)s Algorithm"
 msgstr ""
 
-#: app/templates/algorithm_page.html:39
+#: app/templates/algorithm_page.html:39 app/templates/comparison_form.html:6
 msgid "Data Preview & Validation Report"
 msgstr ""
 
@@ -222,17 +425,20 @@ msgstr ""
 msgid "Validation Report"
 msgstr ""
 
-#: app/templates/algorithm_page.html:56 app/templates/index.html:76
+#: app/templates/algorithm_page.html:56 app/templates/comparison_form.html:10
+#: app/templates/index.html:76
 msgid ""
 "Please review the following issues before proceeding. Algorithms may fail"
 " with non-numeric or missing data."
 msgstr ""
 
-#: app/templates/algorithm_page.html:59 app/templates/index.html:79
+#: app/templates/algorithm_page.html:59 app/templates/comparison_form.html:11
+#: app/templates/index.html:79
 msgid "Non-Numeric Columns Found:"
 msgstr ""
 
-#: app/templates/algorithm_page.html:67 app/templates/index.html:87
+#: app/templates/algorithm_page.html:67 app/templates/comparison_form.html:12
+#: app/templates/index.html:87
 msgid "Columns with Missing Values:"
 msgstr ""
 
@@ -260,79 +466,174 @@ msgstr ""
 msgid "ReduzLab"
 msgstr ""
 
-#: app/templates/base.html:27
+#: app/templates/base.html:28
 msgid "History"
 msgstr ""
 
-#: app/templates/base.html:40
+#: app/templates/base.html:33
+msgid "Switch to English"
+msgstr ""
+
+#: app/templates/base.html:36
+msgid "Mudar para Português"
+msgstr ""
+
+#: app/templates/base.html:50
 msgid "ReduzLab Project"
 msgstr ""
 
-#: app/templates/base.html:43
-msgid "Developed by:"
+#: app/templates/comparison_form.html:4
+msgid "Compare all algorithms"
 msgstr ""
 
-#: app/templates/base.html:48
-msgid "Check the project repository at this"
+#: app/templates/comparison_form.html:19
+msgid "Configure comparison"
 msgstr ""
 
-#: app/templates/history.html:4
+#: app/templates/algorithms_pages/isomap_page.html:22
+#: app/templates/algorithms_pages/kpca_page.html:22
+#: app/templates/algorithms_pages/lda_page.html:22
+#: app/templates/algorithms_pages/lle_page.html:22
+#: app/templates/algorithms_pages/nca_page.html:21
+#: app/templates/algorithms_pages/pca_page.html:22
+#: app/templates/algorithms_pages/tsne_page.html:22
+#: app/templates/comparison_form.html:25
+msgid "Advanced Parameters"
+msgstr ""
+
+#: app/templates/comparison_form.html:26
+msgid ""
+"Parameters are optional and grouped by algorithm. Internal parallelism is"
+" limited to one worker per algorithm during comparisons."
+msgstr ""
+
+#: app/templates/comparison_form.html:55 app/templates/index.html:114
+msgid "Run all algorithms"
+msgstr ""
+
+#: app/templates/comparison_results.html:5
+msgid "Algorithm comparison"
+msgstr ""
+
+#: app/templates/comparison_results.html:6
+msgid "Waiting for results..."
+msgstr ""
+
+#: app/templates/comparison_results.html:7
+msgid "Could not update progress. Retrying..."
+msgstr ""
+
+#: app/templates/comparison_results.html:9
+msgid "Graphs per row"
+msgstr ""
+
+#: app/templates/comparison_results.html:10
+msgid "1 per row"
+msgstr ""
+
+#: app/templates/comparison_results.html:11
+msgid "2 per row"
+msgstr ""
+
+#: app/templates/comparison_results.html:12
+msgid "3 per row"
+msgstr ""
+
+#: app/templates/comparison_results.html:13
+msgid "The number of columns adapts to smaller screens."
+msgstr ""
+
+#: app/templates/comparison_results.html:21
+#: app/templates/comparison_results.html:33
+msgid "Waiting"
+msgstr ""
+
+#: app/templates/comparison_results.html:29
+msgid "New comparison"
+msgstr ""
+
+#: app/templates/comparison_results.html:33
+msgid "Running"
+msgstr ""
+
+#: app/templates/comparison_results.html:33
+msgid "Completed"
+msgstr ""
+
+#: app/templates/comparison_results.html:34
+msgid "Failed"
+msgstr ""
+
+#: app/templates/comparison_results.html:34
+msgid "Interrupted"
+msgstr ""
+
+#: app/templates/comparison_results.html:35
+#, python-format
+msgid "%(done)s of %(total)s algorithms finished"
+msgstr ""
+
+#: app/templates/comparison_results.html:40
+msgid "Sum of eigenvalues"
+msgstr ""
+
+#: app/templates/history.html:7
 msgid "File History"
 msgstr ""
 
-#: app/templates/history.html:8
+#: app/templates/history.html:11
 msgid "Uploaded Datasets"
 msgstr ""
 
-#: app/templates/history.html:15
+#: app/templates/history.html:18
 msgid "Download"
 msgstr ""
 
-#: app/templates/history.html:19
+#: app/templates/history.html:22
 msgid "No uploaded files found."
 msgstr ""
 
-#: app/templates/history.html:26
+#: app/templates/history.html:29
 msgid "Generated Plots"
 msgstr ""
 
-#: app/templates/history.html:33
+#: app/templates/history.html:36
 msgid "View"
 msgstr ""
 
-#: app/templates/history.html:37
+#: app/templates/history.html:40
 msgid "No plots found."
 msgstr ""
 
-#: app/templates/history.html:44
+#: app/templates/history.html:47
 msgid "Reduced Data (CSV)"
 msgstr ""
 
-#: app/templates/history.html:55
+#: app/templates/history.html:58
 msgid "No reduced data files found."
 msgstr ""
 
-#: app/templates/history.html:64
+#: app/templates/history.html:67
 msgid "Delete All Files from Memory"
 msgstr ""
 
-#: app/templates/history.html:72
+#: app/templates/history.html:75
 msgid "Confirm Deletion"
 msgstr ""
 
-#: app/templates/history.html:76
+#: app/templates/history.html:79
 msgid "Are you sure you want to delete all uploaded and generated files?"
 msgstr ""
 
-#: app/templates/history.html:78
+#: app/templates/history.html:81
 msgid "This action cannot be undone."
 msgstr ""
 
-#: app/templates/history.html:82
+#: app/templates/history.html:85
 msgid "Cancel"
 msgstr ""
 
-#: app/templates/history.html:83
+#: app/templates/history.html:86
 msgid "Yes, Delete All Files"
 msgstr ""
 
@@ -360,7 +661,7 @@ msgstr ""
 msgid "3. Select a Reduction Algorithm"
 msgstr ""
 
-#: app/templates/index.html:114
+#: app/templates/index.html:115
 msgid "Choose an algorithm below to proceed with the dimensionality reduction."
 msgstr ""
 
@@ -368,43 +669,8 @@ msgstr ""
 msgid "Configure Isomap Parameters"
 msgstr ""
 
-#: app/templates/algorithms_pages/isomap_page.html:22
-#: app/templates/algorithms_pages/kpca_page.html:22
-#: app/templates/algorithms_pages/lda_page.html:22
-#: app/templates/algorithms_pages/lle_page.html:22
-#: app/templates/algorithms_pages/nca_page.html:21
-#: app/templates/algorithms_pages/pca_page.html:22
-#: app/templates/algorithms_pages/tsne_page.html:22
-msgid "Advanced Parameters"
-msgstr ""
-
 #: app/templates/algorithms_pages/isomap_page.html:26
 msgid "Advanced Isomap Parameters"
-msgstr ""
-
-#: app/templates/algorithms_pages/isomap_page.html:31
-#: app/templates/algorithms_pages/lle_page.html:31
-msgid "Number of Neighbors:"
-msgstr ""
-
-#: app/templates/algorithms_pages/isomap_page.html:36
-#: app/templates/algorithms_pages/tsne_page.html:67
-msgid "Distance Metric:"
-msgstr ""
-
-#: app/templates/algorithms_pages/isomap_page.html:45
-#: app/templates/algorithms_pages/kpca_page.html:61
-#: app/templates/algorithms_pages/lle_page.html:51
-msgid "Eigen Solver:"
-msgstr ""
-
-#: app/templates/algorithms_pages/isomap_page.html:54
-msgid "Path Method:"
-msgstr ""
-
-#: app/templates/algorithms_pages/isomap_page.html:63
-#: app/templates/algorithms_pages/lle_page.html:60
-msgid "Neighbors Algorithm:"
 msgstr ""
 
 #: app/templates/algorithms_pages/isomap_page.html:73
@@ -433,31 +699,8 @@ msgstr ""
 msgid "Advanced KPCA Parameters"
 msgstr ""
 
-#: app/templates/algorithms_pages/kpca_page.html:31
-msgid "Kernel:"
-msgstr ""
-
-#: app/templates/algorithms_pages/kpca_page.html:43
-msgid "Degree (for Poly kernel):"
-msgstr ""
-
-#: app/templates/algorithms_pages/kpca_page.html:49
-msgid "Gamma (for RBF, Poly, Sigmoid):"
-msgstr ""
-
 #: app/templates/algorithms_pages/kpca_page.html:50
 msgid "Default: 1/n_features"
-msgstr ""
-
-#: app/templates/algorithms_pages/kpca_page.html:55
-msgid "Coef0 (for Poly, Sigmoid):"
-msgstr ""
-
-#: app/templates/algorithms_pages/kpca_page.html:72
-#: app/templates/algorithms_pages/lle_page.html:70
-#: app/templates/algorithms_pages/nca_page.html:52
-#: app/templates/algorithms_pages/tsne_page.html:77
-msgid "Random State (optional):"
 msgstr ""
 
 #: app/templates/algorithms_pages/kpca_page.html:73
@@ -476,23 +719,15 @@ msgstr ""
 msgid "Advanced LDA Parameters"
 msgstr ""
 
-#: app/templates/algorithms_pages/lda_page.html:31
-msgid "Solver:"
-msgstr ""
-
 #: app/templates/algorithms_pages/lda_page.html:40
-msgid "Shrinkage:"
-msgstr ""
-
-#: app/templates/algorithms_pages/lda_page.html:41
 msgid "None, auto, or a float 0-1"
 msgstr ""
 
-#: app/templates/algorithms_pages/lda_page.html:42
+#: app/templates/algorithms_pages/lda_page.html:41
 msgid "Only for 'lsqr' and 'eigen' solvers."
 msgstr ""
 
-#: app/templates/algorithms_pages/lda_page.html:50
+#: app/templates/algorithms_pages/lda_page.html:49
 msgid "Run LDA"
 msgstr ""
 
@@ -506,11 +741,6 @@ msgstr ""
 
 #: app/templates/algorithms_pages/lle_page.html:36
 msgid "Regularization (reg):"
-msgstr ""
-
-#: app/templates/algorithms_pages/lle_page.html:41
-#: app/templates/algorithms_pages/tsne_page.html:59
-msgid "Method:"
 msgstr ""
 
 #: app/templates/algorithms_pages/lle_page.html:71
@@ -531,20 +761,6 @@ msgstr ""
 msgid "Advanced NCA Parameters"
 msgstr ""
 
-#: app/templates/algorithms_pages/nca_page.html:31
-#: app/templates/algorithms_pages/tsne_page.html:51
-msgid "Initialization Method:"
-msgstr ""
-
-#: app/templates/algorithms_pages/nca_page.html:42
-#: app/templates/algorithms_pages/tsne_page.html:41
-msgid "Max Iterations:"
-msgstr ""
-
-#: app/templates/algorithms_pages/nca_page.html:47
-msgid "Tolerance (optional):"
-msgstr ""
-
 #: app/templates/algorithms_pages/nca_page.html:63
 msgid "Run NCA"
 msgstr ""
@@ -555,14 +771,6 @@ msgstr ""
 
 #: app/templates/algorithms_pages/pca_page.html:26
 msgid "Advanced PCA Parameters"
-msgstr ""
-
-#: app/templates/algorithms_pages/pca_page.html:32
-msgid "Enable Whitening"
-msgstr ""
-
-#: app/templates/algorithms_pages/pca_page.html:38
-msgid "SVD Solver:"
 msgstr ""
 
 #: app/templates/algorithms_pages/pca_page.html:50
@@ -581,20 +789,8 @@ msgstr ""
 msgid "Advanced T-SNE Parameters"
 msgstr ""
 
-#: app/templates/algorithms_pages/tsne_page.html:31
-msgid "Perplexity:"
-msgstr ""
-
-#: app/templates/algorithms_pages/tsne_page.html:36
-msgid "Learning Rate:"
-msgstr ""
-
 #: app/templates/algorithms_pages/tsne_page.html:37
 msgid "e.g., 200.0 or 'auto'"
-msgstr ""
-
-#: app/templates/algorithms_pages/tsne_page.html:46
-msgid "Early Exaggeration:"
 msgstr ""
 
 #: app/templates/algorithms_pages/tsne_page.html:61

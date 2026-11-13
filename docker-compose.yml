@@ -6,5 +6,19 @@ services:
     volumes:
       - ./uploads:/app/uploads
       - ./results:/app/results
+      - ./instance:/app/instance
     env_file:
       - .env
+    depends_on:
+      - comparison-worker
+
+  comparison-worker:
+    build: .
+    command: ["python", "-m", "app.comparison.worker"]
+    volumes:
+      - ./uploads:/app/uploads
+      - ./results:/app/results
+      - ./instance:/app/instance
+    env_file:
+      - .env
+    stop_grace_period: 15s

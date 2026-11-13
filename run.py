@@ -1,25 +1,33 @@
-import os 
+import atexit
+import os
+import subprocess
+import sys
+
 from app import create_app
 
 app = create_app()
 
-# This block of code ensures that the folders for uploads and results exist
-# before the application starts running. This prevents errors if the folders
-# were not created manually.
-with app.app_context():
-    upload_folder = app.config['UPLOAD_FOLDER']
-    results_folder = app.config['RESULTS_FOLDER']
+for folder in (app.config['UPLOAD_FOLDER'], app.config['RESULTS_FOLDER'], app.instance_path):
+    os.makedirs(folder, exist_ok=True)
 
-    if not os.path.exists(upload_folder):
-        os.makedirs(upload_folder)
-        print(f"Created folder: {upload_folder}")
 
-    if not os.path.exists(results_folder):
-        os.makedirs(results_folder)
-        print(f"Created folder: {results_folder}")
+def start_comparison_worker():
+    """Keep one executor in the reloader parent, never on Gunicorn import."""
+    worker = subprocess.Popen([sys.executable, '-m', 'app.comparison.worker'])
 
-# The code inside this 'if' will only run when you execute 'python run.py'.
+    def stop_worker():
+        if worker.poll() is None:
+            worker.terminate()
+            try:
+                worker.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                worker.kill()
+                worker.wait()
+
+    atexit.register(stop_worker)
+
+
 if __name__ == '__main__':
-    # Starts the Flask development server.
-    # NEVER use debug=True in a production environment.
+    if os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
+        start_comparison_worker()
     app.run(debug=True)

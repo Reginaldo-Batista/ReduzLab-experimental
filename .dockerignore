@@ -6,7 +6,7 @@ test_datasets/
 __pycache__/
 *.pyc
 
-.env.example
+.env
 requisitos.md
 
 .vscode/
@@ -15,3 +15,6 @@ requisitos.md
 
 .git
 .gitignore
+instance/
+uploads/
+results/

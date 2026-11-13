@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% from '_base_parameters.html' import base_parameters_form %}
+{% block content %}
+<h1 class="mb-4">{{ _('Compare all algorithms') }}</h1>
+<div class="card mb-4">
+    <div class="card-header"><h2>{{ _('Data Preview & Validation Report') }}</h2></div>
+    <div class="card-body">
+        {% if validation_results and (validation_results.non_numeric_cols or validation_results.null_info) %}
+        <div class="alert alert-warning" role="alert">
+            {{ _('Please review the following issues before proceeding. Algorithms may fail with non-numeric or missing data.') }}
+            {% if validation_results.non_numeric_cols %}<p>{{ _('Non-Numeric Columns Found:') }} {{ validation_results.non_numeric_cols|join(', ') }}</p>{% endif %}
+            {% if validation_results.null_info %}<p>{{ _('Columns with Missing Values:') }} {% for col, count in validation_results.null_info.items() %}{{ col }} ({{ count }}){% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+        </div>
+        {% endif %}
+        <div class="table-responsive">{{ table_html|safe }}</div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header"><h2>{{ _('Configure comparison') }}</h2></div>
+    <div class="card-body">
+        <form method="post" id="comparison-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            {{ base_parameters_form(column_options, form_data) }}
+            <hr>
+            <h3>{{ _('Advanced Parameters') }}</h3>
+            <p class="text-muted">{{ _('Parameters are optional and grouped by algorithm. Internal parallelism is limited to one worker per algorithm during comparisons.') }}</p>
+            {% for name in algorithms %}
+            <details class="border rounded p-3 mb-2">
+                <summary class="fw-bold">{{ name }}</summary>
+                <div class="row g-3 mt-1">
+                    {% for field in fields[name] %}
+                    {% set key = 'advanced-' ~ name ~ '-' ~ field.key %}
+                    <div class="col-md-6">
+                        {% if field.kind == 'checkbox' %}
+                        <div class="form-check mt-4">
+                            <input class="form-check-input" type="checkbox" id="{{ key }}" name="{{ key }}" value="1" {% if form_data.get(key) %}checked{% endif %}>
+                            <label class="form-check-label" for="{{ key }}">{{ field.label }}</label>
+                        </div>
+                        {% else %}
+                        <label class="form-label" for="{{ key }}">{{ field.label }}</label>
+                        {% if field.options %}
+                        <select class="form-select" id="{{ key }}" name="{{ key }}">
+                            {% for option in field.options %}<option value="{{ option }}" {% if form_data.get(key, field.default) == option %}selected{% endif %}>{{ option }}</option>{% endfor %}
+                        </select>
+                        {% else %}
+                        <input class="form-control" type="{{ field.kind }}" {% if field.kind == 'number' %}step="1"{% endif %} id="{{ key }}" name="{{ key }}" value="{{ form_data.get(key, field.default) }}">
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </details>
+            {% endfor %}
+            {% if error %}<div class="alert alert-danger mt-3" role="alert">{{ error }}</div>{% endif %}
+            <button type="submit" class="btn btn-primary mt-3">{{ _('Run all algorithms') }}</button>
+        </form>
+    </div>
+</div>
+<script>
+document.getElementById('comparison-form').addEventListener('submit', function () {
+    this.querySelector('button[type="submit"]').disabled = true;
+});
+</script>
+{% endblock %}

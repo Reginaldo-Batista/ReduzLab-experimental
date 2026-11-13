@@ -1,5 +1,10 @@
 reduzlab_venv/
+venv/
+.venv/
 file_structure.txt
 .env
 test_datasets/
 __pycache__/
+instance/
+/results
+/uploads

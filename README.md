@@ -55,7 +55,7 @@ Existem duas maneiras de executar a aplicação: localmente com um ambiente virt
 ### Opção 1: Ambiente Virtual (Método Tradicional)
 
 **Pré-requisitos:**
-* Python 3.10+
+* Python 3.11+
 * `pip` e `venv`
 
 **Passo a passo:**
@@ -110,6 +110,7 @@ Existem duas maneiras de executar a aplicação: localmente com um ambiente virt
 1.  **Clone o repositório:**
     ```bash
     git clone https://github.com/joao-victor-costa-gomes/ReduzLab.git
+    cd ReduzLab
     ```
 
 2.  **Configure as variáveis de ambiente:**
@@ -187,7 +188,7 @@ There are two ways to run the application: locally with a Python virtual environ
 ### Option 1: Virtual Environment (Traditional Method)
 
 **Prerequisites:**
-* Python 3.10+
+* Python 3.11+
 * `pip` and `venv`
 
 **Step-by-step:**
@@ -272,3 +273,13 @@ There are two ways to run the application: locally with a Python virtual environ
 .
 
 ---
+
+### Comparação de todos os algoritmos / Compare all algorithms
+
+Depois de enviar uma base, selecione **Executar todos os algoritmos** para configurar os parâmetros gerais uma vez e, opcionalmente, ajustar os parâmetros avançados. Os sete resultados aparecem progressivamente; escolha entre um, dois ou três gráficos por linha, com adaptação automática para telas menores. O formato padrão é HTML interativo; a exportação PNG requer Chromium. Recarregue a página para continuar acompanhando; falhas em um algoritmo não impedem os demais.
+
+After uploading a dataset, select **Run all algorithms** to configure shared parameters and optional per-algorithm settings. Results appear progressively; choose one, two, or three plots per row, with automatic adjustment for smaller screens. Interactive HTML is the default; PNG export requires Chromium. Reload the results page to resume tracking; one algorithm's failure does not stop the others.
+
+`python run.py` inicia o servidor e o executor automaticamente. `docker compose up --build` inicia os serviços web e executor, compartilhando `uploads/`, `results/` e `instance/`. Opcionalmente, configure `COMPARISON_WORKERS` (padrão: 2, limitado aos núcleos disponíveis) e `COMPARISON_TIMEOUT` (padrão: 3600 segundos por algoritmo) no `.env`. O executor processa uma comparação por vez; um reinício interrompe tarefas pendentes, preservando os resultados já concluídos. Execute apenas um executor por instalação.
+
+`python run.py` starts both the web server and executor. Docker Compose starts separate services sharing `uploads/`, `results/`, and `instance/`. Optional `.env` settings `COMPARISON_WORKERS` (default: 2, capped by available CPUs) and `COMPARISON_TIMEOUT` (default: 3600 seconds per algorithm) control resource use. The executor handles one comparison at a time; restarting it interrupts unfinished tasks while preserving completed results. Run only one executor per installation.

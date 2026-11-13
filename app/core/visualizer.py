@@ -5,11 +5,12 @@ import plotly.express as px
 from flask import current_app
 
 class Visualizer:
-    def __init__(self, algorithm_name, reduced_data, target_series, params):
+    def __init__(self, algorithm_name, reduced_data, target_series, params, results_folder=None):
         self.algorithm_name = algorithm_name
         self.reduced_data = reduced_data
         self.target_series = target_series
         self.params = params
+        self.results_folder = results_folder
 
     def _get_axis_labels(self):
         dim = self.params['dimension']
@@ -72,7 +73,7 @@ class Visualizer:
 
     def save_plot(self):
         fig = self.create_plot()
-        results_folder = current_app.config['RESULTS_FOLDER']
+        results_folder = self.results_folder or current_app.config['RESULTS_FOLDER']
         
         # Generate a unique filename for the plot
         unique_id = uuid.uuid4().hex
@@ -104,7 +105,7 @@ class Visualizer:
         df_final = pd.concat([df_reduced, self.target_series.reset_index(drop=True)], axis=1)
 
         # Generate a unique filename for the CSV
-        results_folder = current_app.config['RESULTS_FOLDER']
+        results_folder = self.results_folder or current_app.config['RESULTS_FOLDER']
         unique_id = uuid.uuid4().hex
         filename = f"ReducedData_{self.algorithm_name}_{unique_id}.csv"
         full_path = os.path.join(results_folder, filename)
