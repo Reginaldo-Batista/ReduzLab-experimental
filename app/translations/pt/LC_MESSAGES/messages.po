@@ -473,12 +473,12 @@ msgid "first."
 msgstr "primeiro."
 
 #: app/templates/base.html:6
-msgid "ReduzLab - Dimensionality Reduction"
-msgstr "ReduzLab - Redução de Dimensionalidade"
+msgid "ReduzLab (experimental) - Dimensionality Reduction"
+msgstr "ReduzLab (experimental) - Redução de Dimensionalidade"
 
 #: app/templates/base.html:22
-msgid "ReduzLab"
-msgstr "ReduzLab"
+msgid "ReduzLab (experimental)"
+msgstr "ReduzLab (experimental)"
 
 #: app/templates/base.html:28
 msgid "History"
@@ -493,8 +493,8 @@ msgid "Mudar para Português"
 msgstr ""
 
 #: app/templates/base.html:50
-msgid "ReduzLab Project"
-msgstr "Projeto ReduzLab"
+msgid "ReduzLab (experimental) Project"
+msgstr "Projeto ReduzLab (experimental)"
 
 #: app/templates/comparison_form.html:4
 msgid "Compare all algorithms"

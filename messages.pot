@@ -459,11 +459,11 @@ msgid "first."
 msgstr ""
 
 #: app/templates/base.html:6
-msgid "ReduzLab - Dimensionality Reduction"
+msgid "ReduzLab (experimental) - Dimensionality Reduction"
 msgstr ""
 
 #: app/templates/base.html:22
-msgid "ReduzLab"
+msgid "ReduzLab (experimental)"
 msgstr ""
 
 #: app/templates/base.html:28
@@ -479,7 +479,7 @@ msgid "Mudar para Português"
 msgstr ""
 
 #: app/templates/base.html:50
-msgid "ReduzLab Project"
+msgid "ReduzLab (experimental) Project"
 msgstr ""
 
 #: app/templates/comparison_form.html:4

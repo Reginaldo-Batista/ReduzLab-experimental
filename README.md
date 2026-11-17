@@ -1,4 +1,4 @@
-# ReduzLab 🧪
+# ReduzLab (experimental) 🧪
 
 ---
 
@@ -10,7 +10,11 @@
 <a name="portuguese-version"></a>
 ## ✨ Descrição 📝 
 
-ReduzLab é uma aplicação web interativa construída com Flask para aplicar, visualizar e comparar diferentes algoritmos de redução de dimensionalidade da biblioteca Scikit-learn. A ferramenta permite que usuários façam upload de seus próprios datasets, ajustem parâmetros base e avançados dos algoritmos e visualizem os resultados em 2D ou 3D.
+ReduzLab (experimental) é uma versão experimental do ReduzLab, uma aplicação web interativa construída com Flask para aplicar, visualizar e comparar diferentes algoritmos de redução de dimensionalidade da biblioteca Scikit-learn. A ferramenta permite que usuários façam upload de seus próprios datasets, ajustem parâmetros base e avançados dos algoritmos e visualizem os resultados em 2D ou 3D.
+
+### Créditos
+
+Esta versão deriva do [ReduzLab original](https://github.com/joao-victor-costa-gomes/ReduzLab), criado por João Victor da Costa Gomes, Ingrid Gabrielly Câmara Lira e Maximiliano Araújo da Silva Lopes. A [UERN identifica os criadores e a instituição titular](https://portal.uern.br/propeg/vitrinetecnologica/index.php/tecnologias/reduzlab/). O histórico de commits preserva a autoria das contribuições.
 
 ![Tela Inicial](readme_imgs/home_page_pt.jpg)
 ![Tela Algoritmo](readme_imgs/page_pt.jpg)
@@ -61,8 +65,8 @@ Existem duas maneiras de executar a aplicação: localmente com um ambiente virt
 **Passo a passo:**
 1.  **Clone o repositório:**
     ```bash
-    git clone https://github.com/joao-victor-costa-gomes/ReduzLab.git
-    cd ReduzLab
+    git clone https://github.com/Reginaldo-Batista/ReduzLab-experimental.git
+    cd ReduzLab-experimental
     ```
 
 2.  **Crie e ative um ambiente virtual:**
@@ -109,8 +113,8 @@ Existem duas maneiras de executar a aplicação: localmente com um ambiente virt
 **Passo a passo:**
 1.  **Clone o repositório:**
     ```bash
-    git clone https://github.com/joao-victor-costa-gomes/ReduzLab.git
-    cd ReduzLab
+    git clone https://github.com/Reginaldo-Batista/ReduzLab-experimental.git
+    cd ReduzLab-experimental
     ```
 
 2.  **Configure as variáveis de ambiente:**
@@ -143,7 +147,11 @@ Existem duas maneiras de executar a aplicação: localmente com um ambiente virt
 
 ## ✨ Overview 📝 
 
-ReduzLab is an interactive web application built with Flask to apply, visualize, and compare various dimensionality reduction algorithms from the Scikit-learn library. The tool allows users to upload their own datasets, adjust base and advanced algorithm parameters, and visualize the results in 2D or 3D.
+ReduzLab (experimental) is an experimental version of ReduzLab, an interactive web application built with Flask to apply, visualize, and compare various dimensionality reduction algorithms from the Scikit-learn library. The tool allows users to upload their own datasets, adjust base and advanced algorithm parameters, and visualize the results in 2D or 3D.
+
+### Credits
+
+This version derives from the [original ReduzLab](https://github.com/joao-victor-costa-gomes/ReduzLab), created by João Victor da Costa Gomes, Ingrid Gabrielly Câmara Lira, and Maximiliano Araújo da Silva Lopes. [UERN identifies the creators and the rights-holding institution](https://portal.uern.br/propeg/vitrinetecnologica/index.php/tecnologias/reduzlab/). The commit history preserves attribution for contributions.
 
 ![Initial Screen](readme_imgs/home_page_en.jpg)
 ![Algorithm Screen](readme_imgs/page_en.jpg)
@@ -194,8 +202,8 @@ There are two ways to run the application: locally with a Python virtual environ
 **Step-by-step:**
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/joao-victor-costa-gomes/ReduzLab.git
-    cd ReduzLab
+    git clone https://github.com/Reginaldo-Batista/ReduzLab-experimental.git
+    cd ReduzLab-experimental
     ```
 
 2.  **Create and activate a virtual environment:**
@@ -242,8 +250,8 @@ There are two ways to run the application: locally with a Python virtual environ
 **Step-by-step:**
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/joao-victor-costa-gomes/ReduzLab.git
-    cd ReduzLab
+    git clone https://github.com/Reginaldo-Batista/ReduzLab-experimental.git
+    cd ReduzLab-experimental
     ```
 
 2.  **Configure environment variables:**
