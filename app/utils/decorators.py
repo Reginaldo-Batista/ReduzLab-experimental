@@ -28,6 +28,7 @@ def require_dataset(f):
         if not os.path.exists(file_path):
             flash(_("The uploaded file could not be found. Please upload it again."))
             session.pop('uploaded_filename', None) # Clean up the stale session variable
+            session.pop('uploaded_original_filename', None)
             return redirect(url_for('main.index_page'))
 
         # Try to load and process the data

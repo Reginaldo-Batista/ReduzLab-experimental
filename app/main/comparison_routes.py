@@ -69,6 +69,7 @@ def comparison_form(df, table_html, validation_results):
         else:
             params['n_jobs'] = 1
             params_by_algorithm[name] = params
+    common['dataset_name'] = session.get('uploaded_original_filename', session['uploaded_filename'])
     job_id = store.enqueue(store.database_path(current_app), owner_id(), session['uploaded_filename'], common,
                            params_by_algorithm, errors, session.get('language', 'en'))
     if not job_id:
@@ -110,6 +111,7 @@ def error_message(code):
 @bp.get('/api/comparacoes/<job_id>')
 def comparison_status(job_id):
     job, tasks = authorized_job(job_id)
+    metadata = json.loads(job['params'])
     items = []
     for name in store.ALGORITHMS:
         task = tasks[name]
@@ -118,6 +120,6 @@ def comparison_status(job_id):
                       'metrics': json.loads(task['metrics']) if task['metrics'] else None,
                       'plot_url': url_for('main.serve_result_file', filename=task['plot']) if task['plot'] else None,
                       'csv_url': url_for('main.serve_result_file', filename=task['csv']) if task['csv'] else None})
-    response = jsonify({'id': job_id, 'status': job['status'], 'algorithms': items})
+    response = jsonify({'id': job_id, 'status': job['status'], 'dataset_name': metadata.get('dataset_name', job['dataset']), 'attributes': metadata.get('used_features'), 'algorithms': items})
     response.headers['Cache-Control'] = 'no-store'
     return response

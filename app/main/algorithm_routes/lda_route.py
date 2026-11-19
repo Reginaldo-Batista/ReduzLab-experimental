@@ -19,6 +19,7 @@ def lda_page(df, table_html, validation_results):
     column_options = df.columns.tolist()
     plot_url = None
     metrics = None
+    used_features = None
     csv_url = None
     param_error = None
     scroll_to_results = False
@@ -39,6 +40,7 @@ def lda_page(df, table_html, validation_results):
                 print_lda_parameters(params)
             try:
                 X, y = process_data_for_reduction(df, params)
+                used_features = list(X.columns)
                 
                 lda_reducer = LDA(params)
                 results, error = lda_reducer.fit_transform(X, y)
@@ -94,6 +96,7 @@ def lda_page(df, table_html, validation_results):
                            param_error=param_error,
                            plot_url=plot_url,
                            metrics=metrics,
+                           used_features=used_features,
                            csv_url=csv_url,
                            scroll_to_results=scroll_to_results,
                            scroll_to_params=scroll_to_params,

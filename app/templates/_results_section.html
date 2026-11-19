@@ -28,6 +28,8 @@
             {% endif %}
         </div>
         
+        <p class="mb-1"><strong>{{ _('Dataset:') }}</strong> {{ session.get('uploaded_original_filename', session.get('uploaded_filename', '')) }}</p>
+        <p class="text-break mb-3"><strong>{{ _('Attributes:') }}</strong> {{ used_features | join('; ') }}</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="{{ plot_url }}" class="btn btn-secondary btn-sm" download>
                 {{ _('Download Plot') }}

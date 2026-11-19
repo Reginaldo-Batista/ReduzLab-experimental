@@ -998,3 +998,12 @@ msgstr "O número de colunas se adapta a telas menores."
 
 #~ msgid "Check the project repository at this"
 #~ msgstr "Confira o repositório do projeto neste"
+
+msgid "Dataset:"
+msgstr "Dataset:"
+
+msgid "Attributes:"
+msgstr "Atributos:"
+
+msgid "Not available"
+msgstr "Não disponível"

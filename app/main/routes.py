@@ -42,6 +42,7 @@ def index_page():
                 if not preview_error:
                     preview_success = _("Data preview generated successfully!")
                     session['uploaded_filename'] = unique_filename
+                    session['uploaded_original_filename'] = file.filename
                     # Reading again to detect not numeric (excluding boolean types) columns
                     validation_results = validate_dataframe(df)
                 # Clear success message from upload if preview fails

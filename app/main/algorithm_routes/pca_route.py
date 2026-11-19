@@ -21,6 +21,7 @@ def pca_page(df, table_html, validation_results):
     # Post-processing data
     plot_url = None
     metrics = None
+    used_features = None
     csv_url = None
     # Other variables
     param_error = None
@@ -39,6 +40,7 @@ def pca_page(df, table_html, validation_results):
             try:
                 # Applying PCA algorithm
                 X, y = process_data_for_reduction(df, params)
+                used_features = list(X.columns)
                 pca_reducer = PCA(params)
                 results, error = pca_reducer.fit_transform(X, y)
                 if error:
@@ -88,6 +90,7 @@ def pca_page(df, table_html, validation_results):
                            param_error=param_error,
                            plot_url=plot_url,
                            metrics=metrics,
+                           used_features=used_features,
                            csv_url=csv_url,
                            scroll_to_results=scroll_to_results,
                            scroll_to_params=scroll_to_params,

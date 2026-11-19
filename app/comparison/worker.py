@@ -36,6 +36,10 @@ def run_job(app, path, job, stop):
         classes = df[common['target_column']].nunique()
         with threadpool_limits(limits=1):
             X, y = process_data_for_reduction(df, common)
+        common['used_features'] = [str(column) for column in X.columns]
+        with store.connection(path) as db:
+            db.execute('UPDATE jobs SET params=? WHERE id=?', (json.dumps(common), job_id))
+            db.commit()
         with store.connection(path) as db:
             tasks = {row['algorithm']: dict(row) for row in db.execute('SELECT * FROM tasks WHERE job_id=?', (job_id,))}
         waiting = []

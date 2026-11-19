@@ -20,6 +20,7 @@ def isomap_page(df, table_html, validation_results):
     param_error = None
     plot_url = None
     metrics = None
+    used_features = None
     csv_url = None
     scroll_to_results = False
     scroll_to_params = False
@@ -37,6 +38,7 @@ def isomap_page(df, table_html, validation_results):
                 print_isomap_parameters(params)
             try:
                 X, y = process_data_for_reduction(df, params)
+                used_features = list(X.columns)
                 
                 isomap_reducer = Isomap(params)
                 results, error = isomap_reducer.fit_transform(X, y)
@@ -81,6 +83,7 @@ def isomap_page(df, table_html, validation_results):
                            param_error=param_error,
                            plot_url=plot_url,
                            metrics=metrics,
+                           used_features=used_features,
                            csv_url=csv_url,
                            scroll_to_results=scroll_to_results,
                            scroll_to_params=scroll_to_params,

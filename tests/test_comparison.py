@@ -94,6 +94,11 @@ class ComparisonTests(unittest.TestCase):
         self.assertTrue(saw_partial, 'a completed result should be visible before all tasks finish')
         snapshot = self.status(job_id)
         self.assertEqual(snapshot['status'], 'completed')
+        self.assertEqual(snapshot['dataset_name'], 'iris.csv')
+        self.assertEqual(snapshot['attributes'], ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)'])
+        with self.client.session_transaction() as session:
+            session['uploaded_filename'] = 'other.csv'
+        self.assertEqual(self.status(job_id)['dataset_name'], 'iris.csv')
         self.assertEqual(len(snapshot['algorithms']), 7)
         self.assertTrue(all(item['plot_url'] and item['csv_url'] for item in snapshot['algorithms']))
         self.assertEqual(self.client.get('/comparacoes/' + job_id).status_code, 200)
@@ -174,6 +179,8 @@ class ComparisonTests(unittest.TestCase):
         })
         self.assertEqual(response.status_code, 200)
         self.assertIn('Download Reduced Data', response.get_data(as_text=True))
+        self.assertIn('iris.xlsx', response.get_data(as_text=True))
+        self.assertIn('sepal length (cm); sepal width (cm); petal length (cm); petal width (cm)', response.get_data(as_text=True))
         job_id = self.submit()
         job = store.claim_next(self.path)
         with patch('app.comparison.worker.execute_task', fake_execute_task):

@@ -85,7 +85,7 @@
         return a;
     }
 
-    function renderResult(card, item) {
+    function renderResult(card, item, job) {
         const output = card.querySelector('.algorithm-output');
         if (output.dataset.rendered === item.plot_url) return;
         output.replaceChildren();
@@ -120,6 +120,13 @@
             wrapper.appendChild(image);
             output.appendChild(wrapper);
         }
+        const dataset = document.createElement('p');
+        dataset.className = 'mb-1';
+        dataset.textContent = `${config.labels.dataset} ${job.dataset_name || config.labels.unavailable}`;
+        const attributes = document.createElement('p');
+        attributes.className = 'text-break mb-3';
+        attributes.textContent = `${config.labels.attributes} ${job.attributes ? job.attributes.join('; ') : config.labels.unavailable}`;
+        output.append(dataset, attributes);
         output.appendChild(link(item.plot_url, config.labels.downloadPlot));
         if (item.csv_url) output.appendChild(link(item.csv_url, config.labels.downloadCsv));
         output.dataset.rendered = item.plot_url;
@@ -138,7 +145,7 @@
                 const error = card.querySelector('.algorithm-error');
                 error.classList.toggle('d-none', !item.error);
                 error.textContent = item.error || '';
-                if (item.status === 'completed' && item.plot_url) renderResult(card, item);
+                if (item.status === 'completed' && item.plot_url) renderResult(card, item, job);
                 if (terminal.has(item.status)) done++;
             }
             progress.textContent = config.labels.progress.replace('{done}', done).replace('{total}', job.algorithms.length);
