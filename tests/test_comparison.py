@@ -134,6 +134,8 @@ class ComparisonTests(unittest.TestCase):
         page = response.get_data(as_text=True)
         self.assertIn('container-fluid comparison-page', page)
         self.assertIn('Graphs per row', page)
+        self.assertIn('Synchronize legend classes (HTML)', page)
+        self.assertIn('id="comparison-sync" checked', page)
         self.assertIn('name="comparison-columns" value="1"', page)
         self.assertIn('name="comparison-columns" value="2" checked', page)
         self.assertIn('name="comparison-columns" value="3"', page)
@@ -141,6 +143,7 @@ class ComparisonTests(unittest.TestCase):
             session['language'] = 'pt'
         page = self.client.get('/comparacoes/' + job_id).get_data(as_text=True)
         self.assertIn('Gráficos por linha', page)
+        self.assertIn('Sincronizar classes das legendas (HTML)', page)
         self.assertIn('3 por linha', page)
         individual = self.client.get('/pca').get_data(as_text=True)
         self.assertIn('<main class="container my-4 flex-grow-1">', individual)

@@ -975,3 +975,11 @@ msgstr ""
 msgid "Invalid Metric."
 msgstr ""
 
+#: app/templates/comparison_results.html
+msgid "Synchronize legend classes (HTML)"
+msgstr ""
+
+#: app/templates/comparison_results.html
+msgid "After enabling, the next legend change synchronizes all graphs."
+msgstr ""
+

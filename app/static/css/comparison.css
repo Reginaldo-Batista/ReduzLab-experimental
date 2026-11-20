@@ -14,7 +14,8 @@
     font-weight: 600;
 }
 
-.comparison-layout label {
+.comparison-layout label,
+.comparison-sync label {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;

@@ -286,7 +286,11 @@ There are two ways to run the application: locally with a Python virtual environ
 
 Depois de enviar uma base, selecione **Executar todos os algoritmos** para configurar os parâmetros gerais uma vez e, opcionalmente, ajustar os parâmetros avançados. Os sete resultados aparecem progressivamente; escolha entre um, dois ou três gráficos por linha, com adaptação automática para telas menores. O formato padrão é HTML interativo; a exportação PNG requer Chromium. Recarregue a página para continuar acompanhando; falhas em um algoritmo não impedem os demais.
 
+Nos gráficos HTML, a opção de sincronizar as classes das legendas começa ligada e alcança também resultados ainda em processamento. Desligue-a para controlar cada gráfico separadamente; ao religá-la, a próxima alteração de legenda sincroniza os gráficos. A opção e as seleções permanecem ao recarregar a comparação na mesma aba e não alteram os arquivos baixados.
+
 After uploading a dataset, select **Run all algorithms** to configure shared parameters and optional per-algorithm settings. Results appear progressively; choose one, two, or three plots per row, with automatic adjustment for smaller screens. Interactive HTML is the default; PNG export requires Chromium. Reload the results page to resume tracking; one algorithm's failure does not stop the others.
+
+In HTML plots, legend class synchronization starts enabled and includes results still being processed. Disable it to control plots separately; after re-enabling it, the next legend change synchronizes the plots. The setting and selections survive reloading the comparison in the same tab and do not change downloaded files.
 
 `python run.py` inicia o servidor e o executor automaticamente. `docker compose up --build` inicia os serviços web e executor, compartilhando `uploads/`, `results/` e `instance/`. Opcionalmente, configure `COMPARISON_WORKERS` (padrão: 2, limitado aos núcleos disponíveis) e `COMPARISON_TIMEOUT` (padrão: 3600 segundos por algoritmo) no `.env`. O executor processa uma comparação por vez; um reinício interrompe tarefas pendentes, preservando os resultados já concluídos. Execute apenas um executor por instalação.
 

@@ -9,6 +9,164 @@
     const columnInputs = Array.from(document.querySelectorAll('input[name="comparison-columns"]'));
     const storageKey = 'reduzlab.comparison.columns';
     const validColumns = new Set(['1', '2', '3']);
+    const syncInput = document.getElementById('comparison-sync');
+    const visibilityKey = `reduzlab.comparison.visibility.${config.statusUrl}`;
+    const modeKey = `reduzlab.comparison.visibility-mode.${config.statusUrl}`;
+    const hiddenClasses = new Set();
+    const localClasses = new Map();
+    let syncEnabled = true;
+    let waitingForInteraction = false;
+    const plots = new Map();
+    const frameLoads = new WeakMap();
+    try {
+        const saved = JSON.parse(sessionStorage.getItem(visibilityKey) || '[]');
+        if (Array.isArray(saved) && saved.every(name => typeof name === 'string')) {
+            for (const name of saved) hiddenClasses.add(name);
+        }
+        const mode = JSON.parse(sessionStorage.getItem(modeKey) || 'null');
+        if (mode && typeof mode.enabled === 'boolean' && typeof mode.waiting === 'boolean' && Array.isArray(mode.plots)) {
+            syncEnabled = mode.enabled;
+            waitingForInteraction = syncEnabled && mode.waiting;
+            for (const entry of mode.plots) {
+                if (Array.isArray(entry) && typeof entry[0] === 'string' && Array.isArray(entry[1]) &&
+                    entry[1].every(name => typeof name === 'string')) localClasses.set(entry[0], new Set(entry[1]));
+            }
+        }
+    } catch (_error) {
+        // Storage can be disabled; synchronization still works for this page.
+    }
+    syncInput.checked = syncEnabled;
+
+    function saveVisibility() {
+        try {
+            sessionStorage.setItem(visibilityKey, JSON.stringify(Array.from(hiddenClasses)));
+            sessionStorage.setItem(modeKey, JSON.stringify({enabled: syncEnabled, waiting: waitingForInteraction,
+                plots: Array.from(localClasses, ([name, classes]) => [name, Array.from(classes)])}));
+        } catch (_error) {
+            // Keep the selection in memory when storage is unavailable.
+        }
+    }
+
+    function visible(value) {
+        return value !== false && value !== 'legendonly';
+    }
+
+    function signature(update, indices) {
+        if (!update || !Object.prototype.hasOwnProperty.call(update, 'visible') || !Array.isArray(indices)) return null;
+        const values = Array.isArray(update.visible) ? update.visible : [update.visible];
+        if (!values.length) return null;
+        return JSON.stringify(indices.map((index, i) => [index, visible(values[i % values.length])]));
+    }
+
+    function reconcile(plot) {
+        if (plot.busy || !plot.iframe.isConnected) return;
+        const indices = [];
+        const values = [];
+        const selection = syncEnabled && !waitingForInteraction ? hiddenClasses : localClasses.get(plot.name);
+        plot.graph.data.forEach((trace, index) => {
+            if (typeof trace.name !== 'string') return;
+            const desired = !selection.has(trace.name);
+            if (visible(trace.visible) !== desired) {
+                indices.push(index);
+                values.push(desired ? true : 'legendonly');
+            }
+        });
+        if (!indices.length) return;
+        const update = {visible: values};
+        plot.busy = true;
+        plot.expected = signature(update, indices);
+        try {
+            Promise.resolve(plot.window.Plotly.restyle(plot.graph, update, indices)).then(() => {
+                plot.busy = false;
+                plot.expected = null;
+                reconcile(plot);
+            }, () => {
+                plot.busy = false;
+                plot.expected = null;
+            });
+        } catch (_error) {
+            plot.busy = false;
+            plot.expected = null;
+        }
+    }
+
+    function reconcileAll() {
+        for (const [iframe, plot] of plots) {
+            if (!iframe.isConnected) plots.delete(iframe);
+            else reconcile(plot);
+        }
+    }
+
+    syncInput.addEventListener('change', () => {
+        if (!syncInput.checked && syncEnabled && !waitingForInteraction) {
+            for (const plot of plots.values()) {
+                // Capture the desired shared state, including any redraw still in flight.
+                localClasses.set(plot.name, new Set(hiddenClasses));
+            }
+        }
+        syncEnabled = syncInput.checked;
+        waitingForInteraction = syncEnabled;
+        saveVisibility();
+        reconcileAll();
+    });
+
+    function watchPlot(iframe) {
+        const token = {};
+        frameLoads.set(iframe, token);
+        plots.delete(iframe);
+        let attempts = 0;
+        function attach() {
+            if (!iframe.isConnected || frameLoads.get(iframe) !== token) return;
+            try {
+                const frameWindow = iframe.contentWindow;
+                const graph = frameWindow.document.querySelector('.plotly-graph-div');
+                if (frameWindow.Plotly && graph && typeof graph.on === 'function' &&
+                    Array.isArray(graph.data) && graph._fullLayout && graph._fullLayout._replotting === false) {
+                    const name = iframe.closest('[data-algorithm]').dataset.algorithm;
+                    if (!localClasses.has(name)) localClasses.set(name, new Set());
+                    const plot = {iframe, window: frameWindow, graph, name, busy: false, expected: null};
+                    plots.set(iframe, plot);
+                    graph.on('plotly_restyle', event => {
+                        if (plots.get(iframe) !== plot || !Array.isArray(event)) return;
+                        const [update, indices] = event;
+                        const changed = signature(update, indices);
+                        if (!changed) return;
+                        if (plot.expected === changed) {
+                            plot.expected = null;
+                            return;
+                        }
+                        const values = Array.isArray(update.visible) ? update.visible : [update.visible];
+                        const local = localClasses.get(name);
+                        indices.forEach((index, i) => {
+                            const trace = graph.data[index];
+                            if (!trace || typeof trace.name !== 'string') return;
+                            const shown = visible(values[i % values.length]);
+                            if (shown) local.delete(trace.name);
+                            else local.add(trace.name);
+                            if (syncEnabled && !waitingForInteraction) {
+                                if (shown) hiddenClasses.delete(trace.name);
+                                else hiddenClasses.add(trace.name);
+                            }
+                        });
+                        if (syncEnabled && waitingForInteraction) {
+                            hiddenClasses.clear();
+                            for (const className of local) hiddenClasses.add(className);
+                            waitingForInteraction = false;
+                        }
+                        saveVisibility();
+                        reconcileAll();
+                    });
+                    reconcile(plot);
+                    return;
+                }
+            } catch (_error) {
+                // A failed or inaccessible iframe must not stop the other results.
+                return;
+            }
+            if (++attempts < 300) setTimeout(attach, 100);
+        }
+        attach();
+    }
 
     function applyColumns(value) {
         const columns = validColumns.has(value) ? value : '2';
@@ -57,9 +215,11 @@
     function preparePlot(iframe) {
         try {
             const document = iframe.contentDocument;
-            if (document && document.querySelector('.plotly-graph-div')) {
+            const graph = document && document.querySelector('.plotly-graph-div');
+            if (graph) {
+                graph.parentElement.classList.add('reduzlab-plot-container');
                 const style = document.createElement('style');
-                style.textContent = 'html, body, body > div { width: 100%; height: 100%; margin: 0; }' +
+                style.textContent = 'html, body, .reduzlab-plot-container { width: 100%; height: 100%; margin: 0; }' +
                     'html, body { overflow: hidden; }';
                 document.head.appendChild(style);
             }
@@ -67,6 +227,7 @@
             // Leave documents from other origins unchanged.
         }
         resizePlot(iframe);
+        watchPlot(iframe);
     }
 
     const resizeObserver = 'ResizeObserver' in window ? new ResizeObserver(entries => {

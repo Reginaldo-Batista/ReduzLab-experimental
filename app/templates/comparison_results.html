@@ -12,6 +12,10 @@
     <label><input type="radio" name="comparison-columns" value="3"> {{ _('3 per row') }}</label>
     <p class="comparison-layout-note">{{ _('The number of columns adapts to smaller screens.') }}</p>
 </fieldset>
+<div class="comparison-sync mb-3">
+    <label for="comparison-sync"><input type="checkbox" id="comparison-sync" checked> {{ _('Synchronize legend classes (HTML)') }}</label>
+    <p class="comparison-layout-note">{{ _('After enabling, the next legend change synchronizes all graphs.') }}</p>
+</div>
 <div class="comparison-grid" data-columns="2">
     {% for name in algorithms %}
     <div>

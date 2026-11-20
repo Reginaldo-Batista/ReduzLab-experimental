@@ -993,6 +993,14 @@ msgstr "3 por linha"
 msgid "The number of columns adapts to smaller screens."
 msgstr "O número de colunas se adapta a telas menores."
 
+#: app/templates/comparison_results.html
+msgid "Synchronize legend classes (HTML)"
+msgstr "Sincronizar classes das legendas (HTML)"
+
+#: app/templates/comparison_results.html
+msgid "After enabling, the next legend change synchronizes all graphs."
+msgstr "Ao ativar, a próxima alteração de legenda sincroniza todos os gráficos."
+
 #~ msgid "Developed by:"
 #~ msgstr "Desenvolvido por:"
 
